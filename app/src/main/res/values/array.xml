@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spinnerItems">
+        <item>Marathon</item>
+        <item>Classic</item>
+    </string-array>
+    <string-array name="spinner2Items">
+        <item>NFC Tap</item>
+        <item>Math Solver</item>
+        <item>Screen Tap</item>
+    </string-array>
+    <string-array name="spinner3Items">
+        <item>Hellraiser.mp3</item>
+        <item>Back in Black.mp3</item>
+        <item>Siren.mp3</item>
+        <item>Alien.mp3</item>
+    </string-array>
+</resources>
