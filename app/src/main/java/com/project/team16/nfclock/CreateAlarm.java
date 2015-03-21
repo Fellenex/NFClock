@@ -10,6 +10,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.app.Dialog;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -69,7 +71,39 @@ public class CreateAlarm extends ActionBarActivity {
         showDialog(DATE_DIALOG_ID);
     }
 
+    private TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            activeTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            activeTime.set(Calendar.MINUTE, minute);
+            updateDisplay(activeTimeDisplay, activeTime);
+            unregisterTimeDisplay();
+        }
+    };
 
+    private void unregisterTimeDisplay() {
+        activeTime = null;
+        activeTimeDisplay = null;
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id){
+        switch (id) {
+            case DATE_DIALOG_ID:
+                return new TimePickerDialog(this, timeSetListener, activeTime.get(Calendar.HOUR_OF_DAY), activeTime.get(Calendar.MINUTE),false);
+        }
+        return null;
+    }
+
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog){
+        super.onPrepareDialog(id, dialog);
+        switch (id) {
+            case DATE_DIALOG_ID:
+                ((TimePickerDialog) dialog).updateTime(activeTime.get(Calendar.HOUR_OF_DAY),activeTime.get(Calendar.MINUTE));
+                break;
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
