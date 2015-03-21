@@ -11,31 +11,43 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.app.Dialog;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 
 
 public class CreateAlarm extends ActionBarActivity {
 
     private TextView startTime;
+    private TextView endTime;
     private TimePicker TimePicker_;
+    private int current;
     private int hour_;
     private int minute_;
-    static final int TIME_DIALOG_ID = 999;
+    static final int TIME_START_ID = 1;
+    static final int TIME_END_ID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_alarm);
-        addButtonListener();
+        addTextEditListener();
     }
 
 
-    public void addButtonListener(){
+    public void addTextEditListener(){
         startTime = (TextView) findViewById(R.id.startTime);
+        endTime = (TextView) findViewById(R.id.endTime);
+        endTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog(TIME_END_ID );
+            }
+        });
         startTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog(TIME_DIALOG_ID);
+                showDialog(TIME_START_ID );
             }
         });
     }
@@ -43,8 +55,12 @@ public class CreateAlarm extends ActionBarActivity {
     @Override
     protected Dialog onCreateDialog(int id){
         switch (id) {
-            case TIME_DIALOG_ID:
+            case TIME_START_ID :
+                current = TIME_START_ID;
                 return new TimePickerDialog(this, timePickerListener, hour_, minute_, false);
+            case TIME_END_ID :
+                current = TIME_END_ID;
+                return new TimePickerDialog(this, timePickerListener, hour_, minute_, false );
         }
         return null;
     }
@@ -53,7 +69,12 @@ public class CreateAlarm extends ActionBarActivity {
         public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute){
             hour_ = selectedHour;
             minute_ = selectedMinute;
-            startTime.setText( hour_ + ":" + minute_ );
+            if (current == TIME_START_ID){
+                startTime.setText( hour_ + ":" + minute_ );
+            }
+            if (current == TIME_END_ID){
+                endTime.setText( hour_ + ":" + minute_ );
+            }
         }
     };
 
