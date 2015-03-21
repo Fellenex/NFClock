@@ -1,7 +1,6 @@
 package com.project.team16.nfclock;
 
 import android.app.TimePickerDialog;
-import android.provider.CalendarContract;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,72 +10,66 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.app.Dialog;
 
-import org.w3c.dom.Text;
-
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
 public class CreateAlarm extends ActionBarActivity {
 
-    private TextView startTime;
-    private TextView endTime;
-    private TimePicker TimePicker_;
-    private int current;
-    private int hour_;
-    private int minute_;
-    static final int TIME_START_ID = 1;
-    static final int TIME_END_ID = 0;
+    private TextView startTimeDisplay;
+    private TextView endTimeDisplay;
+    private Calendar startTime;
+    private Calendar endTime;
+
+
+    static final int DATE_DIALOG_ID = 0;
+
+    private TextView activeTimeDisplay;
+    private Calendar activeTime;
+
+    TimePickerDialog.OnTimeSetListener from_timeListener,to_timeListener;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_alarm);
-        addTextEditListener();
-    }
 
+        startTimeDisplay = (TextView) findViewById(R.id.startTimeDisplay);
 
-    public void addTextEditListener(){
-        startTime = (TextView) findViewById(R.id.startTime);
-        endTime = (TextView) findViewById(R.id.endTime);
-        endTime.setOnClickListener(new View.OnClickListener() {
-            @Override
+        startTimeDisplay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                showDialog(TIME_END_ID );
+                showTimeDialog(startTimeDisplay, startTime);
             }
         });
-        startTime.setOnClickListener(new View.OnClickListener() {
-            @Override
+
+        endTimeDisplay = (TextView) findViewById(R.id.endTimeDisplay);
+
+        endTimeDisplay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                showDialog(TIME_START_ID );
+                showTimeDialog(endTimeDisplay, endTime);
             }
         });
+
+        updateDisplay(startTimeDisplay, startTime);
+        updateDisplay(endTimeDisplay, endTime);
+
     }
 
-    @Override
-    protected Dialog onCreateDialog(int id){
-        switch (id) {
-            case TIME_START_ID :
-                current = TIME_START_ID;
-                return new TimePickerDialog(this, timePickerListener, hour_, minute_, false);
-            case TIME_END_ID :
-                current = TIME_END_ID;
-                return new TimePickerDialog(this, timePickerListener, hour_, minute_, false );
-        }
-        return null;
+    private void updateDisplay(TextView timeDisplay, Calendar date){
+        timeDisplay.setText(
+                new SimpleDateFormat("HH:mm").format(date.getTime())
+        );
     }
 
-    private TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener(){
-        public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute){
-            hour_ = selectedHour;
-            minute_ = selectedMinute;
-            if (current == TIME_START_ID){
-                startTime.setText( hour_ + ":" + minute_ );
-            }
-            if (current == TIME_END_ID){
-                endTime.setText( hour_ + ":" + minute_ );
-            }
-        }
-    };
+    public void showTimeDialog(TextView timeDisplay, Calendar date){
+        activeTimeDisplay = timeDisplay;
+        activeTime = date;
+        showDialog(DATE_DIALOG_ID);
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -12,7 +12,7 @@
         android:layout_height="50dp"
         android:id="@+id/tableLayout"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/startTime">
+        android:layout_below="@+id/startTimeDisplay">
 
         <TableRow
             android:layout_width="fill_parent"
@@ -110,7 +110,7 @@
         android:layout_height="wrap_content"
         android:inputType="time"
         android:ems="10"
-        android:id="@+id/startTime"
+        android:id="@+id/startTimeDisplay"
         android:gravity="center"
         android:textSize="25sp"
         android:layout_alignParentTop="true"
@@ -123,12 +123,12 @@
         android:layout_height="wrap_content"
         android:inputType="time"
         android:ems="10"
-        android:id="@+id/endTime"
+        android:id="@+id/endTimeDisplay"
         android:gravity="center"
         android:textSize="25sp"
         android:clickable="true"
-        android:layout_alignTop="@+id/startTime"
-        android:layout_toEndOf="@+id/startTime" />
+        android:layout_alignTop="@+id/startTimeDisplay"
+        android:layout_toEndOf="@+id/startTimeDisplay" />
 
     <CheckBox
         android:layout_width="wrap_content"
