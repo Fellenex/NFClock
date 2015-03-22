@@ -29,12 +29,8 @@ public class CreateAlarm extends ActionBarActivity {
     private TextView endTimeDisplay;
     private Calendar startTime;
     private Calendar endTime;
-
-
-    static final int DATE_DIALOG_ID = 0;
-
-    public TextView activeTimeDisplay;
-    public Calendar activeTime;
+    private TextView activeTimeDisplay;
+    private Calendar activeTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +49,7 @@ public class CreateAlarm extends ActionBarActivity {
 
         endTimeDisplay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                showTimePickerDialog(startTimeDisplay, startTime);
+                showTimePickerDialog(endTimeDisplay, endTime);
             }
         });
 
@@ -87,7 +83,16 @@ public class CreateAlarm extends ActionBarActivity {
     }
 
     public void onUserSetTime(String displayName){
-        Log.d("String",displayName);
+        if (activeTimeDisplay == startTimeDisplay){
+            startTimeDisplay.setText(displayName);
+        }
+        else if (activeTimeDisplay == endTimeDisplay){
+            endTimeDisplay.setText(displayName);
+        }
+        else {
+            Log.d("ERROR", "No active time display");
+        }
+
         //activeTimeDisplay.setText(displayName);
 
     }
