@@ -20,6 +20,7 @@ public class AlarmTemplate {
     private boolean repeatingDays[];
     public boolean repeatWeekly;
     public boolean isOn;
+    public Uri alarmTone;
 
     public AlarmTemplate() {
         repeatingDays = new boolean[7];
@@ -28,7 +29,8 @@ public class AlarmTemplate {
     public void setRepeatingDays(int dayOfWeek, boolean value) {
         repeatingDays[dayOfWeek] = value;
     }
-    public boolean getRepeatingDay(int dayOfWeek){
+
+    public boolean getRepeatingDay(int dayOfWeek) {
         if (repeatingDays[dayOfWeek]) return true;
         else return false;
     }

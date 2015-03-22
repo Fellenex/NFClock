@@ -124,8 +124,21 @@ public class CreateAlarm extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.createAlarmButton) {
+          //  updateAlarmTemplate(); Needs to be implemented
+            finish();
+        }
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
+
+
+
+
+
 
 }
