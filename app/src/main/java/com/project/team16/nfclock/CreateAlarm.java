@@ -3,6 +3,7 @@ package com.project.team16.nfclock;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.provider.OpenableColumns;
@@ -72,16 +73,19 @@ public class CreateAlarm extends ActionBarActivity {
             }
         });
 
-        final LinearLayout toneSelection = (LinearLayout) findViewById(R.id.bottomLayout);
-        toneSelection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
-                startActivityForResult(intent, 1);
-            }
-        });
-
+        //final LinearLayout toneSelection = (LinearLayout) findViewById(R.id.alarmToneLayout);
+        //final TextView toneSelection2 = (TextView) findViewById(R.id.alarmTone);
+        //final EditText toneSelection3 = (EditText) findViewById(R.id.alarmToneDisplay);
     }
+
+
+    public void onToneClick(View view){
+        Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+        startActivityForResult(intent, 1);
+    }
+
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -90,7 +94,7 @@ public class CreateAlarm extends ActionBarActivity {
             Uri toneUri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
 
             if (toneUri!=null){
-                TextView ringToneDisplay = (TextView) findViewById(R.id.alarmToneFull);
+                TextView ringToneDisplay = (EditText) findViewById(R.id.alarmToneDisplay);
                 ringToneDisplay.setText(RingtoneManager.getRingtone(this, toneUri).getTitle(this));
             }
         }

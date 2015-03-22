@@ -20,5 +20,7 @@
     <string name="alarmName">Name:</string>
     <string name="Vibrate">Vibrate</string>
     <string name="Weekly">Repeat</string>
+    <string name="AlarmTone">Alarm Tone:</string>
+    <string name="createAlarm">Save Alarm</string>
 
     </resources>
