@@ -19,6 +19,7 @@ public class AlarmTemplate {
     public int endMinute;
     private boolean repeatingDays[];
     public boolean repeatWeekly;
+    public boolean vibrate;
     public boolean isOn;
     public Uri alarmTone;
 

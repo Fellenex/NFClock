@@ -13,13 +13,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.database.Cursor;
 import android.net.Uri;
 import android.widget.TextView;
+import com.project.team16.nfclock.AlarmTemplate;
 import android.widget.TimePicker;
 import android.app.Dialog;
+import android.widget.ToggleButton;
+
 import com.project.team16.nfclock.timePickerFragment;
 
 
@@ -28,6 +32,7 @@ import org.w3c.dom.Text;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 
 public class CreateAlarm extends ActionBarActivity {
@@ -38,12 +43,18 @@ public class CreateAlarm extends ActionBarActivity {
     private Calendar endTime;
     private Calendar startTime;
     private Calendar activeTime;
+    private int startHour;
+    private int startMinute;
+    private int endHour;
+    private int endMinute;
     private int nameIndex;
+    private AlarmTemplate alarmInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_alarm);
+        alarmInstance = new AlarmTemplate();
 
         startTimeDisplay = (EditText) findViewById(R.id.startTimeDisplay);
 
@@ -85,7 +96,7 @@ public class CreateAlarm extends ActionBarActivity {
         }
     }
 
-    public void showTimePickerDialog(EditText timeDisplay, Calendar date) {
+    private void showTimePickerDialog(EditText timeDisplay, Calendar date) {
         activeTimeDisplay = timeDisplay;
         activeTime = date;
         Log.d("WIN","WINNING");
@@ -94,14 +105,26 @@ public class CreateAlarm extends ActionBarActivity {
         newFragment.show(getFragmentManager(), "myDialog");
     }
 
-    public void onUserSetTime(String displayName){
+    public void onUserSetTime(int HourofDay, int minute){
+        //Log.d("TIME", "" + HourofDay + ":" + minute);
+        String time;
+        time = HourofDay + ":" + minute;
         if (activeTimeDisplay == startTimeDisplay){
-            startTimeDisplay.setText(displayName);
-        }
-        else if (activeTimeDisplay == endTimeDisplay){
-            endTimeDisplay.setText(displayName);
-        }
-        else {
+            startHour = HourofDay;
+            startMinute = minute;
+           // activeTime.set(Calendar.HOUR_OF_DAY, 12);
+            //startTime.set(Calendar.MINUTE,minute);
+           // String time = new SimpleDateFormat("HH:mm", Locale.CANADA).format(startTime.getTime());
+           startTimeDisplay.setText(time);
+        } else if (activeTimeDisplay == endTimeDisplay) {
+            endHour = HourofDay;
+            endMinute = minute;
+            //activeTime.set(Calendar.HOUR_OF_DAY, HourofDay);
+            // endTime.set(Calendar.MINUTE, minute);
+            //String time = new SimpleDateFormat("HH:mm", Locale.CANADA).format(endTime.getTime());
+            //endTimeDisplay.setText(time);
+            endTimeDisplay.setText(time);
+        } else {
             Log.d("ERROR", "No active time display");
         }
     }
@@ -125,11 +148,45 @@ public class CreateAlarm extends ActionBarActivity {
             return true;
         }
         if (id == R.id.createAlarmButton) {
-          //  updateAlarmTemplate(); Needs to be implemented
+            updateAlarmTemplate(); //Needs to be implemented
             finish();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updateAlarmTemplate() { //method updates the alarmInstance to be filled out with the values from the Activity.
+        alarmInstance.startHour = startHour;
+        alarmInstance.startMinute = startMinute;
+        alarmInstance.endHour = endHour;
+        alarmInstance.endMinute = endMinute;
+
+        CheckBox isRepeating = (CheckBox) findViewById(R.id.repeatWeekly);
+        alarmInstance.repeatWeekly = isRepeating.isChecked();
+
+        CheckBox isVibrating = (CheckBox) findViewById(R.id.toggleVibrate);
+        alarmInstance.vibrate = isVibrating.isChecked();
+
+        alarmInstance.isOn = true;
+
+        ToggleButton monday = (ToggleButton) findViewById(R.id.toggleMonday);
+        ToggleButton tuesday = (ToggleButton) findViewById(R.id.toggleTuesday);
+        ToggleButton wednesday = (ToggleButton) findViewById(R.id.toggleWednesday);
+        ToggleButton thursday = (ToggleButton) findViewById(R.id.toggleThursday);
+        ToggleButton friday = (ToggleButton) findViewById(R.id.toggleFriday);
+        ToggleButton saturday = (ToggleButton) findViewById(R.id.toggleSaturday);
+        ToggleButton sunday = (ToggleButton) findViewById(R.id.toggleSunday);
+
+        alarmInstance.setRepeatingDays(0, monday.isChecked());
+        alarmInstance.setRepeatingDays(1, tuesday.isChecked());
+        alarmInstance.setRepeatingDays(2, wednesday.isChecked());
+        alarmInstance.setRepeatingDays(3, thursday.isChecked());
+        alarmInstance.setRepeatingDays(4, friday.isChecked());
+        alarmInstance.setRepeatingDays(5, saturday.isChecked());
+        alarmInstance.setRepeatingDays(6, sunday.isChecked());
+
+
+
     }
 
 

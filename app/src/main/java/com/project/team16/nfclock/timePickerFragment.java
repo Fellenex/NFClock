@@ -43,7 +43,7 @@ public class timePickerFragment extends DialogFragment
             String timeString = hourOfDay + ":" + minute;
             Log.d("TEST","" + timeString);
             CreateAlarm call = (CreateAlarm) getActivity();
-            call.onUserSetTime(timeString);
+            call.onUserSetTime(hourOfDay,minute);
         }
         callCount++;
         //activeDate.set(Calendar.HOUR_OF_DAY, hourOfDay);
