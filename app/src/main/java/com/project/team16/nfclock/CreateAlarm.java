@@ -27,9 +27,9 @@ public class CreateAlarm extends ActionBarActivity {
 
     private TextView startTimeDisplay;
     private TextView endTimeDisplay;
-    private Calendar startTime;
-    private Calendar endTime;
     private TextView activeTimeDisplay;
+    private Calendar endTime;
+    private Calendar startTime;
     private Calendar activeTime;
 
     @Override
@@ -55,30 +55,12 @@ public class CreateAlarm extends ActionBarActivity {
 
     }
 
-    public TextView getActiveTimeDisplay() {
-        return (activeTimeDisplay);
-    }
-
-    public Calendar getActiveTime() {
-        return (activeTime);
-    }
-
-    public void setActiveTimeDisplay(TextView display) {
-        activeTimeDisplay = display;
-    }
-
-    public void setActiveTime(Calendar date){
-        activeTime = date;
-    }
     public void showTimePickerDialog(TextView timeDisplay, Calendar date) {
         activeTimeDisplay = timeDisplay;
         activeTime = date;
         Log.d("WIN","WINNING");
 
         DialogFragment newFragment = new timePickerFragment();
-        //Bundle args = new Bundle();
-        //args.putString("name",activeTimeDisplay.toString());
-        //newFragment.setArguments(args);
         newFragment.show(getFragmentManager(), "myDialog");
     }
 
@@ -92,57 +74,7 @@ public class CreateAlarm extends ActionBarActivity {
         else {
             Log.d("ERROR", "No active time display");
         }
-
-        //activeTimeDisplay.setText(displayName);
-
     }
-     public static void updateDisplay(String timeDisplayName, Calendar date){
-        // if
-        //timeDisplay.setText(new SimpleDateFormat("HH:mm",java.util.Locale.getDefault()).format(date.getTime())
-       // );
-    }
-
-/*
-    public void showTimeDialog(TextView timeDisplay, Calendar date){
-        activeTimeDisplay = timeDisplay;
-        activeTime = date;
-        showDialog(DATE_DIALOG_ID);
-    }
-
-    private TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-            unregisterTimeDisplay();
-        }
-    };
-
-    private void unregisterTimeDisplay() {
-        activeTime = null;
-        activeTimeDisplay = null;
-    }
-
-    @Override
-    protected Dialog onCreateDialog(int id){
-        switch (id) {
-            case DATE_DIALOG_ID:
-                return new TimePickerDialog(this, timeSetListener, activeTime.get(Calendar.HOUR_OF_DAY), activeTime.get(Calendar.MINUTE),false);
-        }
-        return null;
-    }
-
-    @Override
-    protected void onPrepareDialog(int id,@NonNull Dialog dialog){
-        super.onPrepareDialog(id, dialog);
-        switch (id) {
-            case DATE_DIALOG_ID:
-                ((TimePickerDialog) dialog).updateTime(activeTime.get(Calendar.HOUR_OF_DAY),activeTime.get(Calendar.MINUTE));
-                //((TimePickerDialog) dialog).updateTime(activeTime.get(Calendar.HOUR_OF_DAY),activeTime.get(Calendar.Mi),false);
-                break;
-        }
-    }*/
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
