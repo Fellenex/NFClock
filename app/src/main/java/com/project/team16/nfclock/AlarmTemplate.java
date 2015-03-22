@@ -1,5 +1,8 @@
 package com.project.team16.nfclock;
 
+import android.content.Intent;
+import android.net.Uri;
+
 /**
  * Created by Stefan on 2015-03-20.
  */
@@ -29,4 +32,5 @@ public class AlarmTemplate {
         if (repeatingDays[dayOfWeek]) return true;
         else return false;
     }
+
 }

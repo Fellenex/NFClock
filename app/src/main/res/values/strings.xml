@@ -9,4 +9,8 @@
     <string name="spin">Your alarm type.</string>
     <string name="spin2">Your unlock method.</string>
     <string name="spin3">Your alarm noise(s)</string>
+    <string name="startText">Start Time</string>
+    <string name="endText">End Time</string>
+    <string name="alarmTone">Alarm Tone</string>
+    <string name="alarmToneFull">Select your alarm sound.</string>
     </resources>

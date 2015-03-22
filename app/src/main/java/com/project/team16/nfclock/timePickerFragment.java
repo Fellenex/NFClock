@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import com.project.team16.nfclock.CreateAlarm;
@@ -20,7 +21,7 @@ import java.util.Calendar;
 public class timePickerFragment extends DialogFragment
         implements TimePickerDialog.OnTimeSetListener {
 
-    private TextView activeDisplay;
+    private EditText activeDisplay;
     private Calendar activeDate;
     private int callCount = 0;
 
