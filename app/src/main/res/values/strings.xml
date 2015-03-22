@@ -12,5 +12,13 @@
     <string name="startText">Start Time</string>
     <string name="endText">End Time</string>
     <string name="alarmTone">Alarm Tone</string>
-    <string name="alarmToneFull">Select your alarm sound.</string>
+    <string name="M">M</string>
+    <string name="T">T</string>
+    <string name="W">W</string>
+    <string name="F">F</string>
+    <string name="S">S</string>
+    <string name="alarmName">Name:</string>
+    <string name="Vibrate">Vibrate</string>
+    <string name="Weekly">Repeat</string>
+
     </resources>

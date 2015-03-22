@@ -8,251 +8,216 @@
     tools:context="com.project.team16.nfclock.CreateAlarm"
     android:id="@+id/topLayout">
 
-    <TableLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:id="@+id/tableLayout"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/startTimeDisplay">
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <ToggleButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/toggleMonday"
-                android:background="@drawable/my_btn_toggle"
-                android:checked="false"
-                android:textOff="M"
-                android:textOn="M"
-                android:layout_marginStart="0dp"
-                android:layout_weight="1"
-                android:layout_column="0" />
-
-            <ToggleButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/toggleTuesday"
-                android:background="@drawable/my_btn_toggle"
-                android:checked="false"
-                android:textOff="T"
-                android:textOn="T"
-                android:layout_marginStart="0dp"
-                android:layout_weight="1"
-                android:layout_column="1" />
-
-            <ToggleButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/toggleWednesday"
-                android:background="@drawable/my_btn_toggle"
-                android:checked="false"
-                android:textOff="W"
-                android:textOn="W"
-                android:layout_marginStart="0dp"
-                android:layout_weight="1"
-                android:layout_column="3" />
-
-            <ToggleButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/toggleThursday"
-                android:background="@drawable/my_btn_toggle"
-                android:checked="false"
-                android:textOff="T"
-                android:textOn="T"
-                android:layout_marginStart="0dp"
-                android:layout_weight="1"
-                android:layout_column="4" />
-
-            <ToggleButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/toggleFriday"
-                android:background="@drawable/my_btn_toggle"
-                android:checked="false"
-                android:textOff="F"
-                android:textOn="F"
-                android:layout_marginStart="0dp"
-                android:layout_weight="1"
-                android:layout_column="5" />
-
-            <ToggleButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/toggleSaturday"
-                android:background="@drawable/my_btn_toggle"
-                android:checked="false"
-                android:textOff="S"
-                android:textOn="S"
-                android:layout_marginStart="0dp"
-                android:layout_weight="1"
-                android:layout_column="6" />
-
-            <ToggleButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/toggleSunday"
-                android:background="@drawable/my_btn_toggle"
-                android:checked="false"
-                android:textOff="S"
-                android:textOn="S"
-                android:layout_marginStart="0dp"
-                android:layout_weight="1"
-                android:layout_column="22" />
-        </TableRow>
-
-    </TableLayout>
-
-    <EditText
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/startTimeDisplay"
-        android:focusable="false"
-        android:gravity="center"
-        android:textSize="35sp"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:clickable="true"
-        android:text="@string/startText"
-        android:layout_toStartOf="@+id/repeatWeekly" />
+        android:id="@+id/timePickers"
+        android:weightSum="1">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/endTimeDisplay"
-        android:focusable="false"
-        android:gravity="center"
-        android:textSize="35sp"
-        android:clickable="true"
-        android:text="@string/endText"
-        android:layout_alignTop="@+id/startTimeDisplay"
-        android:layout_toEndOf="@+id/startTimeDisplay" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Vibrate"
-        android:id="@+id/toggleVibrate"
-        android:checked="false"
-        android:layout_below="@+id/tableLayout"
-        android:layout_toStartOf="@+id/createAlarmButton" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Repeat Weekly"
-        android:id="@+id/repeatWeekly"
-        android:checked="false"
-        android:layout_above="@+id/GridLayout"
-        android:layout_alignEnd="@+id/tableLayout"
-        android:layout_marginEnd="29dp" />
-
-    <GridLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/toggleVibrate"
-        android:id="@+id/GridLayout"
-        android:layout_marginTop="25sp">
-
-        <TextView
-            android:layout_width="150sp"
-            android:layout_height="50sp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Alarm Mode"
-            android:id="@+id/textView2"
-            android:layout_row="0"
-            android:gravity="end"
-            android:layout_column="0"
-            android:textSize="20sp"
-            android:layout_marginRight="8sp" />
-
-        <Spinner
+        <EditText
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner"
-            android:prompt="@string/spin"
-            android:entries="@array/spinnerItems"
-            android:spinnerMode="dropdown"
-            android:clickable="false"
-            android:gravity="start"
-            android:layout_row="0"
-            android:layout_column="1"
-            android:background="#ffffffff" />
+            android:layout_height="fill_parent"
+            android:id="@+id/startTimeDisplay"
+            android:text="@string/startText"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="false"
+            android:textSize="25dp" />
 
-        <TextView
-            android:layout_width="150sp"
-            android:layout_height="50sp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Silencing Style"
-            android:id="@+id/textView3"
-            android:layout_row="1"
-            android:gravity="end"
-            android:layout_column="0"
-            android:textSize="20sp"
-            android:layout_marginRight="8sp" />
-
-        <Spinner
+        <EditText
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/spinner2"
-            android:prompt="@string/spin2"
-            android:entries="@array/spinner2Items"
-            android:spinnerMode="dropdown"
-            android:clickable="false"
-            android:gravity="start"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:background="#ffffffff" />
-
-    </GridLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Alarm"
-        android:id="@+id/createAlarmButton"
-        android:layout_below="@+id/GridLayout"
-        android:layout_centerHorizontal="true" />
+            android:layout_height="fill_parent"
+            android:id="@+id/endTimeDisplay"
+            android:text="@string/endText"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="false"
+            android:textSize="25dp" />
+    </LinearLayout>
+    
+    <View
+        android:id="@+id/div1"
+        style="@style/Divider"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/timePickers"
+        />
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/bottomLayout"
-        android:layout_below="@+id/createAlarmButton"
-        android:background="@drawable/touch_selector">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="7"
+        android:id="@+id/weekPickers"
+        android:layout_below="@+id/div1"
+        android:layout_centerHorizontal="true">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50sp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/alarmTone"
-            android:id="@+id/alarmTone"
-            android:gravity="center_horizontal"
-            android:layout_row="2"
-            android:layout_column="0"
-            android:textSize="20sp"
-            android:layout_marginRight="8sp" />
-
-        <TextView
-            android:layout_width="fill_parent"
+        <ToggleButton
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/alarmToneFull"
-            android:text="@string/alarmToneFull"
-            android:prompt="@string/spin3"
-            android:entries="@array/spinner3Items"
-            android:spinnerMode="dropdown"
-            android:clickable="false"
-            android:gravity="start"
-            android:layout_row="2"
-            android:layout_column="1"
-            android:background="#ffffffff" />
+            android:id="@+id/toggleMonday"
+            android:textOn="@string/M"
+            android:textOff="@string/M"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/my_btn_toggle"
+            android:padding="2sp"
+            />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleTuesday"
+            android:textOn="@string/T"
+            android:textOff="@string/T"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/my_btn_toggle"
+            android:padding="2sp"
+            />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleWednesday"
+            android:textOn="@string/W"
+            android:textOff="@string/W"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/my_btn_toggle"
+            android:padding="2sp"
+            />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleThursday"
+            android:textOn="@string/T"
+            android:textOff="@string/T"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/my_btn_toggle"
+            android:padding="2sp"
+            />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleFriday"
+            android:textOn="@string/F"
+            android:textOff="@string/F"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/my_btn_toggle"
+            android:padding="2sp"
+            />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleSaturday"
+            android:textOn="@string/S"
+            android:textOff="@string/S"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/my_btn_toggle"
+            android:padding="2sp"
+            />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleSunday"
+            android:textOn="@string/S"
+            android:textOff="@string/S"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/my_btn_toggle"
+            android:padding="2sp"
+            />
+
+        </LinearLayout>
+
+    <View
+        android:id="@+id/div2"
+        style="@style/Divider"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/weekPickers"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/nameLayout"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/div2"
+        android:weightSum="1">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_weight="0.15"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/alarmName"
+        android:textSize="25dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_weight="0.85"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text=""
+        android:id="@+id/alarmNameDisplay"
+        />
+
     </LinearLayout>
+
+    <View
+        android:id="@+id/div3"
+        style="@style/Divider"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/nameLayout"
+        />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:id="@+id/toggles"
+        android:layout_below="@+id/div3"
+        android:layout_centerHorizontal="true">
+
+     <CheckBox
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_weight="1"
+         android:text="@string/Vibrate"
+         android:id="@+id/toggleVibrate"
+         android:layout_gravity="center_horizontal"
+         />
+
+    <CheckBox
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/Weekly"
+        android:id="@+id/repeatWeekly"
+        android:layout_gravity="center_horizontal"
+        />
+    </LinearLayout>
+
+
+
+
+
+
+
 
 </RelativeLayout>
