@@ -50,6 +50,7 @@ public class CreateAlarm extends ActionBarActivity {
     private int endMinute;
     private int nameIndex;
     private AlarmTemplate alarmInstance;
+    private Uri toneUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,18 @@ public class CreateAlarm extends ActionBarActivity {
         startActivityForResult(intent, 1);
     }
 
+    public void saveAlarmtoDB(View view){
+        Log.d("TODB", "DATA>>?");
+        updateAlarmTemplate();
+
+        DBManager dbManager = new DBManager(this);
+        if (alarmInstance.id < 0){
+            dbManager.createAlarm(alarmInstance);
+        } else{
+            dbManager.updateAlarm(alarmInstance);
+        }
+        finish();
+    }
 
 
 
@@ -91,7 +104,7 @@ public class CreateAlarm extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
         if (resultCode == Activity.RESULT_OK && requestCode == 1){
-            Uri toneUri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+            toneUri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
 
             if (toneUri!=null){
                 TextView ringToneDisplay = (EditText) findViewById(R.id.alarmToneDisplay);
@@ -116,17 +129,10 @@ public class CreateAlarm extends ActionBarActivity {
         if (activeTimeDisplay == startTimeDisplay){
             startHour = HourofDay;
             startMinute = minute;
-           // activeTime.set(Calendar.HOUR_OF_DAY, 12);
-            //startTime.set(Calendar.MINUTE,minute);
-           // String time = new SimpleDateFormat("HH:mm", Locale.CANADA).format(startTime.getTime());
            startTimeDisplay.setText(time);
         } else if (activeTimeDisplay == endTimeDisplay) {
             endHour = HourofDay;
             endMinute = minute;
-            //activeTime.set(Calendar.HOUR_OF_DAY, HourofDay);
-            // endTime.set(Calendar.MINUTE, minute);
-            //String time = new SimpleDateFormat("HH:mm", Locale.CANADA).format(endTime.getTime());
-            //endTimeDisplay.setText(time);
             endTimeDisplay.setText(time);
         } else {
             Log.d("ERROR", "No active time display");
@@ -151,10 +157,17 @@ public class CreateAlarm extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-        if (id == R.id.createAlarmButton) {
-            updateAlarmTemplate(); //Needs to be implemented
+       /* if (id == R.id.createAlarmButton) {
+            updateAlarmTemplate();
+
+            DBManager dbManager = new DBManager(this);
+            if (alarmInstance.id < 0){
+                dbManager.createAlarm(alarmInstance);
+            } else{
+                dbManager.updateAlarm(alarmInstance);
+            }
             finish();
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -171,7 +184,15 @@ public class CreateAlarm extends ActionBarActivity {
         CheckBox isVibrating = (CheckBox) findViewById(R.id.toggleVibrate);
         alarmInstance.vibrate = isVibrating.isChecked();
 
+        EditText name = (EditText) findViewById(R.id.alarmNameDisplay);
+        alarmInstance.name = name.getText().toString();
+
+        alarmInstance.alarmTone = toneUri;
+
         alarmInstance.isOn = true;
+
+        EditText interval = (EditText) findViewById(R.id.alarmIntervalDisplay);
+        alarmInstance.interval = Double.parseDouble(interval.getText().toString());
 
         ToggleButton monday = (ToggleButton) findViewById(R.id.toggleMonday);
         ToggleButton tuesday = (ToggleButton) findViewById(R.id.toggleTuesday);
@@ -189,17 +210,7 @@ public class CreateAlarm extends ActionBarActivity {
         alarmInstance.setRepeatingDays(5, saturday.isChecked());
         alarmInstance.setRepeatingDays(6, sunday.isChecked());
 
-
-
     }
-
-
-
-
-
-
-
-
 
 
 }

@@ -22,5 +22,6 @@
     <string name="Weekly">Repeat</string>
     <string name="AlarmTone">Alarm Tone:</string>
     <string name="createAlarm">Save Alarm</string>
+    <string name="Interval">Interval</string>
 
     </resources>
