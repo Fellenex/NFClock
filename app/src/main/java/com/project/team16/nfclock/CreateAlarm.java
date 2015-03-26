@@ -38,6 +38,10 @@ import java.util.Locale;
 
 public class CreateAlarm extends ActionBarActivity {
 
+
+    private DBManager dbManager = new DBManager(this);
+    private AlarmTemplate alarmTemplate;
+
     private EditText startTimeDisplay;
     private EditText endTimeDisplay;
     private EditText activeTimeDisplay;
@@ -157,17 +161,18 @@ public class CreateAlarm extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-       /* if (id == R.id.createAlarmButton) {
+        if (id == R.id.createAlarmButton) {
             updateAlarmTemplate();
 
-            DBManager dbManager = new DBManager(this);
+
             if (alarmInstance.id < 0){
                 dbManager.createAlarm(alarmInstance);
             } else{
                 dbManager.updateAlarm(alarmInstance);
             }
+            setResult(RESULT_OK);
             finish();
-        }*/
+        }
 
         return super.onOptionsItemSelected(item);
     }

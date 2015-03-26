@@ -1,5 +1,8 @@
 package com.project.team16.nfclock;
 
+import android.app.ListActivity;
+import android.content.Context;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -7,23 +10,36 @@ import android.view.MenuItem;
 import android.view.View;
 import android.content.Intent;
 import android.app.Activity;
+import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+
+import java.util.List;
 
 
+public class homePage extends Activity {
 
-
-
-public class homePage extends ActionBarActivity {
+    //private Adapter adapter_;
+   // private DBManager dbManager = new DBManager(this);
+   // private Context context_;
+   // private AlarmTemplate alarmDetails;
+   // private ListView listView = (ListView) findViewById(R.id.list);
 
     public void sendMessage(View view) {
         Intent intent = new Intent(homePage.this, CreateAlarm.class);
         startActivity(intent);
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+        //populateListView();
+
     }
+
 
 
     @Override
@@ -47,4 +63,45 @@ public class homePage extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+/*    public void setAlarmEnabled(long id, boolean isOn) {
+        AlarmTemplate model = dbManager.getAlarm(id);
+        model.isOn = isOn;
+        dbManager.updateAlarm(model);
+
+        adapter_.setAlarms(dbManager.getAlarms());
+        adapter_.notifyDataSetChanged();
+    }
+
+    public void startAlarmDetails(long id){
+        Intent intent = new Intent(this, homePage.class);
+        intent.putExtra("id",id);
+        startActivityForResult(intent,0);
+    }*/
+
+/*
+    public boolean onOptionItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.createAlarmButton: {
+                startAlarmDetails(-1);
+                break;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+
+        if (resultCode == RESULT_OK) {
+            adapter_.setAlarms(dbManager.getAlarms());
+            adapter_.notifyDataSetChanged();
+        }
+
+    }*/
+
+
+
 }

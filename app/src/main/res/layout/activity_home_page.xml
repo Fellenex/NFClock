@@ -3,7 +3,8 @@
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".homePage">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".homePage"
+    android:id="@+id/test">
 
     <TextClock
         android:layout_width="wrap_content"
@@ -43,15 +44,14 @@
         android:layout_above="@+id/button"
         android:background="#ff000000">
 
-        <TextView
+        <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="\n No Upcoming Alarms"
-            android:id="@+id/textView"
-            android:gravity="center_horizontal"
-            android:layout_margin="3dp"
-            android:background="#ffffffff" />
+            android:id="@+id/list"
+            android:layout_gravity="center_vertical"
+            android:fillViewport="false"
+            android:background="#ffffffff"
+            android:layout_margin="4dp" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Mainlayout"
+        android:layout_margin="10dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/alarmvalue_name"
+            android:layout_toRightOf="@+id/alarmvalue_time2"
+            android:layout_marginLeft="10dp"
+            android:text="TEMP NAME"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:id="@+id/alarmvalue_time"
+            android:text="00 : 00"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/alarmvalue_time"
+            android:id="@+id/buffer"
+            android:text="to"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/buffer"
+            android:id="@+id/alarmvalue_time2"
+            android:text="00 : 00"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            />
+
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:minWidth="30dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleSwitch"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            />
+
+        <TextView
+            android:id="@+id/ifMonday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="8dp"
+            android:layout_below="@+id/alarmvalue_name"
+            android:text="@string/M"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
+
+        <TextView
+            android:id="@+id/ifTuesday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ifMonday"
+            android:layout_toRightOf="@+id/ifMonday"
+            android:layout_marginLeft="8dp"
+            android:text="@string/T"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
+
+        <TextView
+            android:id="@+id/ifWednesday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ifTuesday"
+            android:layout_toRightOf="@+id/ifTuesday"
+            android:layout_marginLeft="8dp"
+            android:text="@string/W"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
+
+
+        <TextView
+            android:id="@+id/ifThursday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ifWednesday"
+            android:layout_toRightOf="@+id/ifWednesday"
+            android:layout_marginLeft="8dp"
+            android:text="@string/T"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
+
+        <TextView
+            android:id="@+id/ifFriday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ifThursday"
+            android:layout_toRightOf="@+id/ifThursday"
+            android:layout_marginLeft="8dp"
+            android:text="@string/F"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
+
+        <TextView
+            android:id="@+id/ifSaturday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ifFriday"
+            android:layout_toRightOf="@+id/ifFriday"
+            android:layout_marginLeft="8dp"
+            android:text="@string/S"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
+
+        <TextView
+            android:id="@+id/ifSunday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ifSaturday"
+            android:layout_toRightOf="@+id/ifSaturday"
+            android:layout_marginLeft="8dp"
+            android:text="@string/S"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            />
+
+        <View
+            android:id="@+id/divTemplate"
+            style="@style/Divider"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/ifMonday"
+            android:background="@color/blue"
+            />
+
+        </RelativeLayout>
+
+
+
+</FrameLayout>
