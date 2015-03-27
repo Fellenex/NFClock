@@ -211,12 +211,17 @@ public class CreateAlarm extends ActionBarActivity {
     public void saveAlarm(View v){
         updateAlarmTemplate();
 
+        AlarmManagerExtra.voidAlarms(this);
+
         DBManager dbManager = new DBManager(this);
         if (alarmInstance.id < 0){
             dbManager.createAlarm(alarmInstance);
         } else {
             dbManager.updateAlarm(alarmInstance);
         }
+
+        AlarmManagerExtra.setAlarms(this);
+
         setResult(RESULT_OK);
         finish();
     }

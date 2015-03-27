@@ -59,9 +59,14 @@ public class homePage extends ListActivity {
     }
 
     public void setAlarmEnabled(long id, boolean isOn){
+        AlarmManagerExtra.voidAlarms(this);
+
+
         AlarmTemplate template = dbManager.getAlarm(id);
         template.isOn = isOn;
         dbManager.updateAlarm(template);
+
+        AlarmManagerExtra.setAlarms(this);
 
         adapter_.setAlarms(dbManager.getAlarms());
         adapter_.notifyDataSetChanged();

@@ -11,7 +11,7 @@
     <string name="spin3">Your alarm noise(s)</string>
     <string name="startText">Start Time</string>
     <string name="endText">End Time</string>
-    <string name="alarmTone">Alarm Tone</string>
+    <string name="alarmTone">Tone</string>
     <string name="M">M</string>
     <string name="T">T</string>
     <string name="W">W</string>
@@ -20,8 +20,17 @@
     <string name="alarmName">Name:</string>
     <string name="Vibrate">Vibrate</string>
     <string name="Weekly">Repeat</string>
-    <string name="AlarmTone">Alarm Tone:</string>
+    <string name="AlarmTone">Tone:</string>
     <string name="createAlarm">Save Alarm</string>
     <string name="Interval">Interval</string>
+    <string-array name="alarm_choices">
+        <item>Marathon</item>
+        <item>Single</item>
+    </string-array>
+
+    <string-array name="alarm_endType">
+        <item>NFC Tap</item>
+        <item>Tap to Silence</item>
+    </string-array>
 
     </resources>

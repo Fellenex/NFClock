@@ -154,47 +154,6 @@
         android:layout_below="@+id/weekPickers"
         />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:id="@+id/nameLayout"
-        android:background="@color/white"
-        android:orientation="horizontal"
-        android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:layout_below="@+id/div2"
-        android:weightSum="1">
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_weight="0.15"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:layout_marginLeft="5dp"
-        android:text="@string/alarmName"
-        android:textSize="18dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_weight="0.85"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text=""
-        android:singleLine="true"
-        android:textAlignment="center"
-        android:id="@+id/alarmNameDisplay"
-        />
-
-    </LinearLayout>
-
-    <View
-        android:id="@+id/div3"
-        style="@style/DividerMaterial"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/nameLayout"
-        />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -203,19 +162,19 @@
         android:orientation="horizontal"
         android:weightSum="2"
         android:id="@+id/toggles"
-        android:layout_below="@+id/div3"
+        android:layout_below="@+id/div2"
         android:background="@color/white"
         android:paddingBottom="5dp"
         android:layout_centerHorizontal="true">
 
-         <CheckBox
-             android:layout_width="fill_parent"
-             android:layout_height="wrap_content"
-             android:layout_weight="1"
-             android:text="@string/Vibrate"
-             android:id="@+id/toggleVibrate"
-             android:layout_gravity="center_horizontal"
-             />
+        <CheckBox
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Vibrate"
+            android:id="@+id/toggleVibrate"
+            android:layout_gravity="center_horizontal"
+            />
 
         <CheckBox
             android:layout_width="fill_parent"
@@ -228,17 +187,169 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/div4"
+        android:id="@+id/div3"
         style="@style/DividerMaterial"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/toggles"
+    />
+
+
+   <LinearLayout
+       android:orientation="horizontal"
+       android:layout_width="fill_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/nameLayout"
+       android:paddingTop="5dp"
+       android:paddingBottom="5dp"
+       android:background="@color/white"
+       android:layout_below="@+id/div3"
+       android:weightSum="1">
+
+
+       <!--        <TextView
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:id="@+id/alarmType"
+            android:text="Mode"
+            android:clickable="true"
+            android:focusable="false"
+            android:layout_weight="0.3"
+            android:gravity="center"
+            android:onClick="onToneClick"
+            android:singleLine="true"
+            android:textSize="18sp" />
+            -->
+
+
+
+       <TextView
+           android:layout_width="0px"
+           android:id="@+id/alarnName"
+           android:layout_weight="0.3"
+           android:layout_height="wrap_content"
+           android:gravity="center"
+           android:layout_marginLeft="5dp"
+           android:text="@string/alarmName"
+           android:textSize="18dp"/>
+
+       <EditText
+           android:layout_width="0px"
+           android:layout_weight="0.7"
+           android:layout_height="wrap_content"
+           android:gravity="center"
+           android:text=""
+           android:singleLine="true"
+           android:textAlignment="center"
+           android:id="@+id/alarmNameDisplay"
+           />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/div4"
+        style="@style/DividerMaterial"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/nameLayout"
         />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/div4"
+        android:id="@+id/alarmTypeLayout"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:background="@color/white"
+        android:layout_below="@+id/div4"
+        android:weightSum="1"
+        >
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:id="@+id/alarmType"
+            android:text="Mode"
+            android:clickable="true"
+            android:focusable="false"
+            android:layout_weight="0.3"
+            android:gravity="center"
+            android:onClick="onToneClick"
+            android:singleLine="true"
+            android:textSize="18sp" />
+
+        <EditText
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:id="@+id/alarmTypeSpinner"
+            android:text="Marathon"
+            android:focusable="false"
+            android:clickable="true"
+            android:layout_weight="0.7"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textSize="18sp" />
+        </LinearLayout>
+
+    <View
+        android:id="@+id/div5"
+        style="@style/DividerMaterial"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/alarmTypeLayout"
+        />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/alarmUnlockLayout"
+        android:paddingBottom="5dp"
+        android:background="@color/white"
+        android:layout_below="@+id/div5"
+        android:weightSum="1"
+        >
+
+        <TextView
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:id="@+id/alarmUnlock"
+            android:text="Mode"
+            android:clickable="true"
+            android:focusable="false"
+            android:layout_weight="0.3"
+            android:gravity="center"
+            android:onClick="onToneClick"
+            android:singleLine="true"
+            android:textSize="18sp" />
+
+        <EditText
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:id="@+id/alarmUnlockSpinner"
+            android:text="NFC Tap"
+            android:focusable="false"
+            android:clickable="true"
+            android:layout_weight="0.7"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/div6"
+        style="@style/DividerMaterial"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/alarmUnlockLayout"
+        />
+
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/div6"
         android:paddingBottom="5dp"
         android:id="@+id/alarmToneLayout"
         android:background="@color/white"
@@ -264,7 +375,7 @@
             android:text=""
             android:focusable="false"
             android:clickable="true"
-            android:layout_weight="0.8"
+            android:layout_weight="0.7"
             android:gravity="center"
             android:onClick="onToneClick"
             android:singleLine="true"
@@ -272,7 +383,7 @@
     </LinearLayout>
 
     <View
-        android:id="@+id/div5"
+        android:id="@+id/div7"
         style="@style/DividerMaterial"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/alarmToneLayout"
@@ -282,7 +393,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/div5"
+        android:layout_below="@id/div7"
         android:id="@+id/alarmIntervalLayout"
         android:paddingBottom="5dp"
         android:background="@color/white"
@@ -307,7 +418,7 @@
             android:id="@+id/alarmIntervalDisplay"
             android:text=""
             android:focusable="true"
-            android:layout_weight="0.8"
+            android:layout_weight="0.7"
             android:singleLine="true"
             android:gravity="center"
             android:textSize="18sp" />
