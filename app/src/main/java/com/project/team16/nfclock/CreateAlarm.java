@@ -42,6 +42,22 @@ public class CreateAlarm extends ActionBarActivity {
     private EditText startTimeDisplay;
     private EditText endTimeDisplay;
     private EditText activeTimeDisplay;
+
+
+    private ToggleButton isMonday;
+    private ToggleButton isTuesday;
+    private ToggleButton isWednesday;
+    private ToggleButton isThurdsay;
+    private ToggleButton isFriday;
+    private ToggleButton isSaturday;
+    private ToggleButton isSunday;
+
+    private CheckBox isVibrate;
+    private CheckBox isRepeating;
+
+    private EditText nameDisplay;
+    private EditText intervalDisplay;
+
     private Calendar endTime;
     private Calendar startTime;
     private Calendar activeTime;
@@ -50,6 +66,8 @@ public class CreateAlarm extends ActionBarActivity {
     private int endHour;
     private int endMinute;
     private int nameIndex;
+
+    private DBManager dbManager = new DBManager(this);
     private AlarmTemplate alarmInstance;
     private Uri toneUri;
 
@@ -57,7 +75,7 @@ public class CreateAlarm extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_alarm);
-        alarmInstance = new AlarmTemplate();
+        //alarmInstance = new AlarmTemplate();
 
         startTimeDisplay = (EditText) findViewById(R.id.startTimeDisplay);
 
@@ -77,9 +95,59 @@ public class CreateAlarm extends ActionBarActivity {
 
         long id = getIntent().getExtras().getLong("id");
 
+        //Connect display to variables
+        startTimeDisplay = (EditText) findViewById(R.id.startTimeDisplay);
+        endTimeDisplay = (EditText) findViewById(R.id.endTimeDisplay);
+
+        intervalDisplay = (EditText) findViewById(R.id.alarmIntervalDisplay);
+        isRepeating = (CheckBox) findViewById(R.id.repeatWeekly);
+        isVibrate = (CheckBox) findViewById(R.id.toggleVibrate);
+        nameDisplay = (EditText) findViewById(R.id.alarmNameDisplay);
+
+        isMonday = (ToggleButton) findViewById(R.id.toggleMonday);
+        isTuesday = (ToggleButton) findViewById(R.id.toggleTuesday);
+        isWednesday = (ToggleButton) findViewById(R.id.toggleWednesday);
+        isThurdsay = (ToggleButton) findViewById(R.id.toggleThursday);
+        isFriday = (ToggleButton) findViewById(R.id.toggleFriday);
+        isSaturday = (ToggleButton) findViewById(R.id.toggleSaturday);
+        isSunday = (ToggleButton) findViewById(R.id.toggleSunday);
+
+
+
+
+
+
+
         if (id == -1) { //new alarm
             alarmInstance = new AlarmTemplate();
         } else { //Populate the activity with previously created alarms details
+            String longstr = Long.toString(id);
+            Log.d("ID",longstr);
+            alarmInstance = dbManager.getAlarm(id);
+
+            startTimeDisplay.setText(String.format("%02d:%02d", alarmInstance.startHour, alarmInstance.startMinute));
+            endTimeDisplay.setText(String.format("%02d:%02d", alarmInstance.startHour, alarmInstance.startMinute));
+
+            startHour = alarmInstance.startHour;
+            startMinute = alarmInstance.startMinute;
+
+            endHour = alarmInstance.endHour;
+            endMinute = alarmInstance.endMinute;
+
+            nameDisplay.setText(alarmInstance.name);
+            String results = String.valueOf(alarmInstance.interval);
+            intervalDisplay.setText(results);
+            isRepeating.setChecked(alarmInstance.repeatWeekly);
+            isVibrate.setChecked(alarmInstance.vibrate);
+
+            isMonday.setChecked(alarmInstance.getRepeatingDay(0));
+            isTuesday.setChecked(alarmInstance.getRepeatingDay(1));
+            isWednesday.setChecked(alarmInstance.getRepeatingDay(2));
+            isThurdsay.setChecked(alarmInstance.getRepeatingDay(3));
+            isFriday.setChecked(alarmInstance.getRepeatingDay(4));
+            isSaturday.setChecked(alarmInstance.getRepeatingDay(5));
+            isSunday.setChecked(alarmInstance.getRepeatingDay(6));
+
 
         }
 
@@ -123,8 +191,7 @@ public class CreateAlarm extends ActionBarActivity {
 
     public void onUserSetTime(int HourofDay, int minute){
         //Log.d("TIME", "" + HourofDay + ":" + minute);
-        String time;
-        time = HourofDay + ":" + minute;
+        String time = String.format("%02d:%02d", HourofDay, minute);
         if (activeTimeDisplay == startTimeDisplay){
             startHour = HourofDay;
             startMinute = minute;
@@ -145,6 +212,19 @@ public class CreateAlarm extends ActionBarActivity {
         return true;
     }
 
+    public void saveAlarm(View v){
+        updateAlarmTemplate();
+
+        DBManager dbManager = new DBManager(this);
+        if (alarmInstance.id < 0){
+            dbManager.createAlarm(alarmInstance);
+        } else {
+            dbManager.updateAlarm(alarmInstance);
+        }
+        setResult(RESULT_OK);
+        finish();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -155,21 +235,6 @@ public class CreateAlarm extends ActionBarActivity {
             case android.R.id.home: {
                 finish();
                 break;
-            }
-            case R.id.action_save_alarm_details: {
-
-                updateAlarmTemplate();
-
-                DBManager dbManager = new DBManager(this);
-                if (alarmInstance.id < 0 ) {
-                    Log.d("onOptionsItemSelected","IF");
-                    dbManager.createAlarm(alarmInstance);
-                } else {
-                    Log.d("onOptionsItemSelected","ELSE");
-                    dbManager.updateAlarm(alarmInstance);
-                }
-                setResult(RESULT_OK);
-                finish();
             }
         }
 

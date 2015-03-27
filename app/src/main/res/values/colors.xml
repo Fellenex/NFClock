@@ -6,6 +6,7 @@
     <color name="Primary">#03A9F4</color>
     <color name="LightPrimary">#B3E5FC</color>
     <color name="Accent">#536DFE</color>
+    <color name="Accent_Green">#FFC107</color>
     <color name="PrimaryText">#212121</color>
     <color name="LightText">#B6B6B6</color>
     <color name="SecondaryText">#727272</color>

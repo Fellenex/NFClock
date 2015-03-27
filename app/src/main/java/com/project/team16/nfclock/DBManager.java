@@ -129,11 +129,13 @@ public class DBManager extends SQLiteOpenHelper {
 
 
     public AlarmTemplate getAlarm(long id){
+        Log.d("Start","GetAlarm");
         SQLiteDatabase db = this.getReadableDatabase();
 
         String select = "SELECT * FROM " + AlarmStorage.Alarm.TABLE_NAME + " WHERE " + AlarmStorage.Alarm._ID + " = " + id;
         Cursor c = db.rawQuery(select,null);
 
+        Log.d("Finsh","getAlarm");
         if (c.moveToNext()) {
             return fillModel(c);
         }

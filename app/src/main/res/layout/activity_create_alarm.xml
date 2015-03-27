@@ -1,12 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:layout_weight="1"
     tools:context="com.project.team16.nfclock.CreateAlarm"
-    android:background="@color/Primary"
+    android:background="@color/DarkPrimary"
     android:id="@+id/topLayout">
 
     <LinearLayout
@@ -14,7 +13,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:layout_alignParentTop="true"
+        android:background="@color/white"
         android:id="@+id/timePickers"
         android:weightSum="1">
 
@@ -45,7 +47,7 @@
     
     <View
         android:id="@+id/div1"
-        style="@style/Divider"
+        style="@style/DividerMaterial"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/timePickers"
         />
@@ -147,7 +149,7 @@
 
     <View
         android:id="@+id/div2"
-        style="@style/Divider"
+        style="@style/DividerMaterial"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/weekPickers"
         />
@@ -155,8 +157,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:id="@+id/nameLayout"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:layout_below="@+id/div2"
         android:weightSum="1">
 
@@ -166,6 +171,8 @@
         android:layout_weight="0.15"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textAlignment="center"
+        android:layout_marginLeft="5dp"
         android:text="@string/alarmName"
         android:textSize="18dp" />
 
@@ -176,6 +183,7 @@
         android:layout_gravity="center"
         android:text=""
         android:singleLine="true"
+        android:textAlignment="center"
         android:id="@+id/alarmNameDisplay"
         />
 
@@ -183,7 +191,7 @@
 
     <View
         android:id="@+id/div3"
-        style="@style/Divider"
+        style="@style/DividerMaterial"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/nameLayout"
         />
@@ -196,6 +204,8 @@
         android:weightSum="2"
         android:id="@+id/toggles"
         android:layout_below="@+id/div3"
+        android:background="@color/white"
+        android:paddingBottom="5dp"
         android:layout_centerHorizontal="true">
 
          <CheckBox
@@ -219,7 +229,7 @@
 
     <View
         android:id="@+id/div4"
-        style="@style/Divider"
+        style="@style/DividerMaterial"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/toggles"
         />
@@ -229,8 +239,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/div4"
+        android:paddingBottom="5dp"
         android:id="@+id/alarmToneLayout"
-        android:background="@drawable/touch_selector"
+        android:background="@color/white"
         android:weightSum="1">
 
         <TextView
@@ -262,7 +273,7 @@
 
     <View
         android:id="@+id/div5"
-        style="@style/Divider"
+        style="@style/DividerMaterial"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/alarmToneLayout"
         />
@@ -273,7 +284,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/div5"
         android:id="@+id/alarmIntervalLayout"
-        android:background="@drawable/touch_selector"
+        android:paddingBottom="5dp"
+        android:background="@color/white"
         android:weightSum="1">
 
         <TextView
@@ -302,13 +314,30 @@
     </LinearLayout>
 
 
-
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/createAlarm"
-        android:id="@+id/createAlarmButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/saveAlarmButton"
+        android:textColor="@color/white"
+        android:background="@color/DarkPrimary"
+        android:onClick="saveAlarm"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true" />
+
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:background="@color/white"
+        android:layout_above="@+id/saveAlarmButton"
+        android:layout_below="@+id/alarmIntervalLayout">
+    </LinearLayout>
 
 </RelativeLayout>

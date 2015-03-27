@@ -83,32 +83,6 @@ public class Adapter extends BaseAdapter {
         toggleOnOff((TextView) view.findViewById(R.id.ifSaturday), model.getRepeatingDay(5));
         toggleOnOff((TextView) view.findViewById(R.id.ifSunday), model.getRepeatingDay(6));
 
-/*        ToggleButton toggle = (ToggleButton) view.findViewById(R.id.toggleSwitch);
-        //toggle.setChecked(model.isOn);
-        toggle.setTag(Long.valueOf(model.id));
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                public void onCheckedChanged(CompoundButton buttonView, boolean isOn))
-            }
-        });
-
-*//*
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((CreateAlarm) context_).openAlarmDetails();
-            }
-        });
-*//*
-
-       toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ((homePage) context_).setAlarmEnabled(((Long) buttonView.getTag()).longValue(), isChecked);
-            }
-        });*/
-
         view.setTag(Long.valueOf(model.id));
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,16 +90,6 @@ public class Adapter extends BaseAdapter {
                 ((homePage) context_).openAlarm(((Long) view.getTag()).longValue());
             }
         });
-
-    /*
-        view.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                ((homePage) context_).deleteAlarm(((Long) view.getTag()).longValue());
-                return true;
-            }
-        });
-        */
 
         return view;
     }
