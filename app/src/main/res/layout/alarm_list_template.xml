@@ -15,7 +15,8 @@
             android:id="@+id/alarmvalue_name"
             android:layout_toRightOf="@+id/alarmvalue_time2"
             android:layout_marginLeft="10dp"
-            android:text="TEMP NAME"
+            android:text=""
+            android:textColor="@color/Accent"
             android:textAppearance="?android:attr/textAppearanceMedium"
             />
 
@@ -26,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:textColor="@color/PrimaryText"
             android:id="@+id/alarmvalue_time"
             android:text="00 : 00"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -38,6 +40,7 @@
             android:layout_toRightOf="@+id/alarmvalue_time"
             android:id="@+id/buffer"
             android:text="to"
+            android:textColor="@color/SecondaryText"
             android:textAppearance="?android:attr/textAppearanceLarge"
             />
 
@@ -46,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/buffer"
+            android:textColor="@color/PrimaryText"
             android:id="@+id/alarmvalue_time2"
             android:text="00 : 00"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -70,6 +74,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="8dp"
             android:layout_below="@+id/alarmvalue_name"
+            android:textColor="@color/SecondaryText"
             android:text="@string/M"
             android:textAppearance="?android:attr/textAppearanceMedium"
             />

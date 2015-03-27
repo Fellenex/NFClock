@@ -1,8 +1,8 @@
-/*
 package com.project.team16.nfclock;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +14,6 @@ import android.widget.ToggleButton;
 import java.util.List;
 import java.util.Objects;
 
-*/
-/**
- * Created by Stefan on 2015-03-23.
- *//*
 
 public class Adapter extends BaseAdapter {
 
@@ -33,31 +29,31 @@ public class Adapter extends BaseAdapter {
         Alarms_ = alarms;
     }
 
+
+
+
     @Override
     public int getCount() {
         if (Alarms_ != null){
             return Alarms_.size();
-        } else {
-            return 0;
         }
+            return 0;
     }
 
     @Override
     public Object getItem(int index){
         if (Alarms_ != null){
             return Alarms_.get(index);
-        } else {
-            return null;
         }
+            return null;
     }
 
     @Override
     public long getItemId(int index){
         if (Alarms_ != null){
             return Alarms_.get(index).id;
-        } else {
-            return 0;
         }
+            return 0;
     }
 
     @Override
@@ -68,6 +64,7 @@ public class Adapter extends BaseAdapter {
             view = inflater_.inflate(R.layout.alarm_list_template, parent, false);
 
         }
+
         AlarmTemplate model = (AlarmTemplate) getItem(index);
         TextView starttime = (TextView) view.findViewById(R.id.alarmvalue_time);
         TextView endtime = (TextView) view.findViewById(R.id.alarmvalue_time2);
@@ -86,48 +83,63 @@ public class Adapter extends BaseAdapter {
         toggleOnOff((TextView) view.findViewById(R.id.ifSaturday), model.getRepeatingDay(5));
         toggleOnOff((TextView) view.findViewById(R.id.ifSunday), model.getRepeatingDay(6));
 
-        ToggleButton toggle = (ToggleButton) view.findViewById(R.id.toggleSwitch);
-        toggle.setChecked(model.isOn);
+/*        ToggleButton toggle = (ToggleButton) view.findViewById(R.id.toggleSwitch);
+        //toggle.setChecked(model.isOn);
         toggle.setTag(Long.valueOf(model.id));
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isOn))
+            }
+        });
 
-*/
-/*        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+*//*
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((CreateAlarm) context_).openAlarmDetails();
+            }
+        });
+*//*
+
+       toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 ((homePage) context_).setAlarmEnabled(((Long) buttonView.getTag()).longValue(), isChecked);
             }
-        });
+        });*/
 
         view.setTag(Long.valueOf(model.id));
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((homePage) context_).startAlarmDetails(((Long) view.getTag()).longValue());
+                ((homePage) context_).openAlarm(((Long) view.getTag()).longValue());
             }
-        });*//*
+        });
 
-
-*/
-/*        view.setOnLongClickListener(new View.OnLongClickListener() {
+    /*
+        view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 ((homePage) context_).deleteAlarm(((Long) view.getTag()).longValue());
                 return true;
             }
-        });*//*
-
+        });
+        */
 
         return view;
     }
 
         private void toggleOnOff(TextView view, boolean isOn){
         if (isOn) {
-            view.setBackgroundColor(Color.BLUE);
+
+            view.setTextColor(context_.getResources().getColor(R.color.PrimaryText));
+            view.setTypeface(null, Typeface.BOLD);
         } else {
-            view.setBackgroundColor(Color.RED);
+            view.setTextColor(context_.getResources().getColor(R.color.LightText));
+            view.setTypeface(null, Typeface.NORMAL);
         }
         }
 
 
     }
-*/

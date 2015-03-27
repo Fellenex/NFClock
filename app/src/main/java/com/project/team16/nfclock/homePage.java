@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,33 +15,63 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.ToggleButton;
 
 import java.util.List;
 
 
-public class homePage extends Activity {
+public class homePage extends ListActivity {
 
-    //private Adapter adapter_;
-   // private DBManager dbManager = new DBManager(this);
-   // private Context context_;
-   // private AlarmTemplate alarmDetails;
+   private Adapter adapter_;
+   private DBManager dbManager = new DBManager(this);
+   private Context context_;
    // private ListView listView = (ListView) findViewById(R.id.list);
 
     public void sendMessage(View view) {
-        Intent intent = new Intent(homePage.this, CreateAlarm.class);
-        startActivity(intent);
+        openAlarm(-1);
+    }
 
+
+    public void openAlarm(long id){
+        Intent intent = new Intent(homePage.this, CreateAlarm.class);
+        intent.putExtra("id", id);
+       // Log.d("HEELO","TEMP");
+        startActivityForResult(intent, 0);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        context_ = this;
         setContentView(R.layout.activity_home_page);
+
+        adapter_ = new Adapter(this, dbManager.getAlarms());
+
+        setListAdapter(adapter_);
+
+
+       // listView = (ListView) findViewById(android.R.id.list);
+       // listView.setEmptyView(findViewById(android.R.id.empty));
+        //listView.setAdapter(adapter_);
         //populateListView();
 
     }
 
+    public void setAlarmEnabled(long id, boolean isOn){
+        AlarmTemplate template = dbManager.getAlarm(id);
+        template.isOn = isOn;
+        dbManager.updateAlarm(template);
 
+        adapter_.setAlarms(dbManager.getAlarms());
+        adapter_.notifyDataSetChanged();
+    }
+
+/*    public void openAlarmDetails(long id){
+        Intent intent = new Intent(this, CreateAlarm.class);
+        intent.putExtra("id", id);
+        startActivityForResult(intent,0);
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -64,43 +95,24 @@ public class homePage extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-/*    public void setAlarmEnabled(long id, boolean isOn) {
-        AlarmTemplate model = dbManager.getAlarm(id);
-        model.isOn = isOn;
-        dbManager.updateAlarm(model);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        //Log.d("HitHomepage",data.toString());
 
-        adapter_.setAlarms(dbManager.getAlarms());
-        adapter_.notifyDataSetChanged();
-    }
+        if (data == null){
+            Log.d("Data", "Is NuLL");
 
-    public void startAlarmDetails(long id){
-        Intent intent = new Intent(this, homePage.class);
-        intent.putExtra("id",id);
-        startActivityForResult(intent,0);
-    }*/
-
-/*
-    public boolean onOptionItemSelected(MenuItem item){
-        switch (item.getItemId()) {
-            case R.id.createAlarmButton: {
-                startAlarmDetails(-1);
-                break;
-            }
         }
 
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode,Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
-
         if (resultCode == RESULT_OK) {
+            Log.d("ResultCode", "Okay");
+            //Log.d
             adapter_.setAlarms(dbManager.getAlarms());
             adapter_.notifyDataSetChanged();
         }
 
-    }*/
+    }
 
 
 

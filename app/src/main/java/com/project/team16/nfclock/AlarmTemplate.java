@@ -11,7 +11,7 @@ public class AlarmTemplate {
         Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
     }
 
-    public long id;
+    public long id = -1;
     public String name;
     public int startHour;
     public int startMinute;
@@ -22,7 +22,7 @@ public class AlarmTemplate {
     public boolean repeatWeekly;
     public boolean vibrate;
     public boolean isOn;
-    public Uri alarmTone;
+    //public Uri alarmTone;
 
     public AlarmTemplate() {
         repeatingDays = new boolean[7];

@@ -6,11 +6,15 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.util.Log;
 
 import com.project.team16.nfclock.AlarmStorage;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Stefan on 2015-03-22.
@@ -31,9 +35,9 @@ public class DBManager extends SQLiteOpenHelper {
                     AlarmStorage.Alarm.COLUMN_NAME_ALARM_REPEAT_DAYS + " TEXT," +
                     AlarmStorage.Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY + " BOOLEAN," +
                     AlarmStorage.Alarm.COLUMN_NAME_ALARM_INTERVAL + " DOUBLE," +
-                    AlarmStorage.Alarm.COLUMN_NAME_ALARM_TONE + " TEXT," +
+                   // AlarmStorage.Alarm.COLUMN_NAME_ALARM_TONE + " TEXT," +
                     AlarmStorage.Alarm.COLUMN_NAME_ALARM_ENABLED + " BOOLEAN," +
-                    AlarmStorage.Alarm.COLUMN_NAME_ALARM_VIBRATE + " BOOLEAN" + ")";
+                    AlarmStorage.Alarm.COLUMN_NAME_ALARM_VIBRATE + " BOOLEAN" + ");";
 
     private static final String SQL_DELETE_ALARM = "DROP TABLE IF EXISTS " + AlarmStorage.Alarm.TABLE_NAME;
 
@@ -61,19 +65,19 @@ public class DBManager extends SQLiteOpenHelper {
         model.endHour = c.getInt(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_END_TIME_HOUR));
         model.endMinute = c.getInt(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_END_TIME_MINUTE));
         model.interval = c.getDouble(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_INTERVAL));
-        model.repeatWeekly = c.getInt(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY)) == 0 ? false : true;
-        model.alarmTone = Uri.parse(c.getString(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_TONE)));
-        model.isOn = c.getInt(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_ENABLED)) == 0 ? false : true;
-        model.repeatWeekly = c.getInt(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_VIBRATE)) == 0 ? false : true;
-
+        model.repeatWeekly = c.getInt(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY))!=0;
+       // model.alarmTone = Uri.parse(c.getString(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_TONE)));
+        model.isOn = c.getInt(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_ENABLED))!=0;
+        model.vibrate = c.getInt(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_VIBRATE))!=0;
         String[] days = c.getString(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_REPEAT_DAYS)).split(",");
         for (int i=0; i<days.length; i++){
-            model.setRepeatingDays(i, days[i].equals("false") ? false : true);
+            model.setRepeatingDays(i, !days[i].equals("false"));
         }
         return model;
     }
 
     private ContentValues fillModel(AlarmTemplate model){
+        Log.d("HIT","contentValues");
         ContentValues values = new ContentValues();
         values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_NAME, model.name);
         values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_START_TIME_HOUR, model.startHour);
@@ -81,8 +85,10 @@ public class DBManager extends SQLiteOpenHelper {
         values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_END_TIME_HOUR, model.endHour);
         values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_END_TIME_MINUTE, model.endMinute);
         values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY, model.repeatWeekly);
-        values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_TONE, model.alarmTone.toString());
+        //values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_TONE, model.alarmTone.toString());
         values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_VIBRATE, model.vibrate);
+        values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_INTERVAL, model.interval);
+        values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_ENABLED, model.isOn);
 
 
         String days = "";
@@ -90,15 +96,37 @@ public class DBManager extends SQLiteOpenHelper {
             days += model.getRepeatingDay(i) + ",";
         }
         values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_REPEAT_DAYS, days);
-
+        Log.d("HIT","contentValues_Finished");
         return values;
 
     }
 
     public long createAlarm(AlarmTemplate model){
+        Log.d("HIT","createAlarm_Start");
         ContentValues values = fillModel(model);
+        Log.d("HIT","createAlarm_End");
+        printContentValues(values);
         return getWritableDatabase().insert(AlarmStorage.Alarm.TABLE_NAME, null, values);
     }
+
+    public void printContentValues(ContentValues vals)
+    {
+        Set<Map.Entry<String, Object>> s=vals.valueSet();
+        Iterator itr = s.iterator();
+
+        Log.d("DatabaseSync", "ContentValue Length :: " +vals.size());
+
+        while(itr.hasNext())
+        {
+            Map.Entry me = (Map.Entry)itr.next();
+            String key = me.getKey().toString();
+            Object value =  me.getValue();
+
+            Log.d("DatabaseSync", "Key:"+key+", values:"+(String)(value == null?null:value.toString()));
+        }
+    }
+
+
 
     public AlarmTemplate getAlarm(long id){
         SQLiteDatabase db = this.getReadableDatabase();

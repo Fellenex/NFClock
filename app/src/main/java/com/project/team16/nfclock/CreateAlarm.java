@@ -39,9 +39,6 @@ import java.util.Locale;
 public class CreateAlarm extends ActionBarActivity {
 
 
-    private DBManager dbManager = new DBManager(this);
-    private AlarmTemplate alarmTemplate;
-
     private EditText startTimeDisplay;
     private EditText endTimeDisplay;
     private EditText activeTimeDisplay;
@@ -78,6 +75,15 @@ public class CreateAlarm extends ActionBarActivity {
             }
         });
 
+        long id = getIntent().getExtras().getLong("id");
+
+        if (id == -1) { //new alarm
+            alarmInstance = new AlarmTemplate();
+        } else { //Populate the activity with previously created alarms details
+
+        }
+
+
         //final LinearLayout toneSelection = (LinearLayout) findViewById(R.id.alarmToneLayout);
         //final TextView toneSelection2 = (TextView) findViewById(R.id.alarmTone);
         //final EditText toneSelection3 = (EditText) findViewById(R.id.alarmToneDisplay);
@@ -89,32 +95,21 @@ public class CreateAlarm extends ActionBarActivity {
         startActivityForResult(intent, 1);
     }
 
-    public void saveAlarmtoDB(View view){
-        Log.d("TODB", "DATA>>?");
-        updateAlarmTemplate();
 
-        DBManager dbManager = new DBManager(this);
-        if (alarmInstance.id < 0){
-            dbManager.createAlarm(alarmInstance);
-        } else{
-            dbManager.updateAlarm(alarmInstance);
-        }
-        finish();
-    }
 
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-        if (resultCode == Activity.RESULT_OK && requestCode == 1){
+/*        if (resultCode == Activity.RESULT_OK && requestCode == 1){
             toneUri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
 
             if (toneUri!=null){
                 TextView ringToneDisplay = (EditText) findViewById(R.id.alarmToneDisplay);
                 ringToneDisplay.setText(RingtoneManager.getRingtone(this, toneUri).getTitle(this));
             }
-        }
+        }*/
     }
 
     private void showTimePickerDialog(EditText timeDisplay, Calendar date) {
@@ -146,7 +141,7 @@ public class CreateAlarm extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_create_alarm, menu);
+        getMenuInflater().inflate(R.menu.create_alarm_menu, menu);
         return true;
     }
 
@@ -155,29 +150,34 @@ public class CreateAlarm extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        if (id == R.id.createAlarmButton) {
-            updateAlarmTemplate();
-
-
-            if (alarmInstance.id < 0){
-                dbManager.createAlarm(alarmInstance);
-            } else{
-                dbManager.updateAlarm(alarmInstance);
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                finish();
+                break;
             }
-            setResult(RESULT_OK);
-            finish();
+            case R.id.action_save_alarm_details: {
+
+                updateAlarmTemplate();
+
+                DBManager dbManager = new DBManager(this);
+                if (alarmInstance.id < 0 ) {
+                    Log.d("onOptionsItemSelected","IF");
+                    dbManager.createAlarm(alarmInstance);
+                } else {
+                    Log.d("onOptionsItemSelected","ELSE");
+                    dbManager.updateAlarm(alarmInstance);
+                }
+                setResult(RESULT_OK);
+                finish();
+            }
         }
 
         return super.onOptionsItemSelected(item);
     }
 
     private void updateAlarmTemplate() { //method updates the alarmInstance to be filled out with the values from the Activity.
+
         alarmInstance.startHour = startHour;
         alarmInstance.startMinute = startMinute;
         alarmInstance.endHour = endHour;
@@ -192,7 +192,7 @@ public class CreateAlarm extends ActionBarActivity {
         EditText name = (EditText) findViewById(R.id.alarmNameDisplay);
         alarmInstance.name = name.getText().toString();
 
-        alarmInstance.alarmTone = toneUri;
+       // alarmInstance.alarmTone = toneUri;
 
         alarmInstance.isOn = true;
 

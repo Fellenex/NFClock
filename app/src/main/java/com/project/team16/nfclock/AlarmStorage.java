@@ -20,9 +20,9 @@ public final class AlarmStorage {
         public static final String COLUMN_NAME_ALARM_START_TIME_MINUTE = "startMinute";
         public static final String COLUMN_NAME_ALARM_END_TIME_MINUTE = "endMinute";
         public static final String COLUMN_NAME_ALARM_INTERVAL = "interval";
-        public static final String COLUMN_NAME_ALARM_REPEAT_WEEKLY = "weekly";
-        public static final String COLUMN_NAME_ALARM_REPEAT_DAYS= "days";
-        public static final String COLUMN_NAME_ALARM_TONE = "tone";
+        public static final String COLUMN_NAME_ALARM_REPEAT_WEEKLY = "repeatWeekly";
+        public static final String COLUMN_NAME_ALARM_REPEAT_DAYS= "repeatingDays";
+        public static final String COLUMN_NAME_ALARM_TONE = "alarmTone";
         public static final String COLUMN_NAME_ALARM_ENABLED = "isOn";
         public static final String COLUMN_NAME_ALARM_VIBRATE = "vibrate";
 

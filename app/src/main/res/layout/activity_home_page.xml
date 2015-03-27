@@ -1,10 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:layout_height="match_parent"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".homePage"
-    android:id="@+id/test">
+    android:id="@+id/test"
+    android:background="@color/DarkPrimary">
 
     <TextClock
         android:layout_width="wrap_content"
@@ -14,6 +14,8 @@
         android:format12Hour="h:mm:ss a"
         android:format24Hour="h:mm:ss"
         android:layout_alignParentTop="true"
+        android:textColor="@color/white"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_centerHorizontal="true" />
 
     <TextClock
@@ -22,23 +24,30 @@
         android:id="@+id/currentDateClock"
         android:layout_below="@+id/currentTimeClock"
         android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:format12Hour="MMMM dd, yyyy"
         android:format24Hour="MMMM dd, yyyy"
-        android:textSize="20dp" />
+        android:textColor="@color/white"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/newAlarm"
         android:id="@+id/button"
         android:onClick="sendMessage"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:textColor="@color/white"
+        android:background="@color/DarkPrimary"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         android:layout_below="@+id/currentDateClock"
         android:layout_alignParentStart="true"
         android:layout_above="@+id/button"
@@ -47,11 +56,11 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/list"
+            android:id="@android:id/list"
             android:layout_gravity="center_vertical"
             android:fillViewport="false"
             android:background="#ffffffff"
-            android:layout_margin="4dp" />
+            android:layout_margin="1dp" />
     </LinearLayout>
 
 </RelativeLayout>
