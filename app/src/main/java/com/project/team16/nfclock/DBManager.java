@@ -35,7 +35,7 @@ public class DBManager extends SQLiteOpenHelper {
                     AlarmStorage.Alarm.COLUMN_NAME_ALARM_REPEAT_DAYS + " TEXT," +
                     AlarmStorage.Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY + " BOOLEAN," +
                     AlarmStorage.Alarm.COLUMN_NAME_ALARM_INTERVAL + " DOUBLE," +
-                   // AlarmStorage.Alarm.COLUMN_NAME_ALARM_TONE + " TEXT," +
+                    AlarmStorage.Alarm.COLUMN_NAME_ALARM_TONE + " TEXT," +
                     AlarmStorage.Alarm.COLUMN_NAME_ALARM_ENABLED + " BOOLEAN," +
                     AlarmStorage.Alarm.COLUMN_NAME_ALARM_VIBRATE + " BOOLEAN" + ");";
 
@@ -66,7 +66,7 @@ public class DBManager extends SQLiteOpenHelper {
         model.endMinute = c.getInt(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_END_TIME_MINUTE));
         model.interval = c.getDouble(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_INTERVAL));
         model.repeatWeekly = c.getInt(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY))!=0;
-       // model.alarmTone = Uri.parse(c.getString(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_TONE)));
+        model.alarmTone = Uri.parse(c.getString(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_TONE)));
         model.isOn = c.getInt(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_ENABLED))!=0;
         model.vibrate = c.getInt(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_VIBRATE))!=0;
         String[] days = c.getString(c.getColumnIndex(AlarmStorage.Alarm.COLUMN_NAME_ALARM_REPEAT_DAYS)).split(",");
@@ -85,7 +85,7 @@ public class DBManager extends SQLiteOpenHelper {
         values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_END_TIME_HOUR, model.endHour);
         values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_END_TIME_MINUTE, model.endMinute);
         values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY, model.repeatWeekly);
-        //values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_TONE, model.alarmTone.toString());
+        values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_TONE, model.alarmTone.toString());
         values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_VIBRATE, model.vibrate);
         values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_INTERVAL, model.interval);
         values.put(AlarmStorage.Alarm.COLUMN_NAME_ALARM_ENABLED, model.isOn);

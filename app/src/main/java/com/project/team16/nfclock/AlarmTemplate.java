@@ -22,7 +22,7 @@ public class AlarmTemplate {
     public boolean repeatWeekly;
     public boolean vibrate;
     public boolean isOn;
-    //public Uri alarmTone;
+    public Uri alarmTone;
 
     public AlarmTemplate() {
         repeatingDays = new boolean[7];

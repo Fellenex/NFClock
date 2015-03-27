@@ -83,11 +83,22 @@ public class Adapter extends BaseAdapter {
         toggleOnOff((TextView) view.findViewById(R.id.ifSaturday), model.getRepeatingDay(5));
         toggleOnOff((TextView) view.findViewById(R.id.ifSunday), model.getRepeatingDay(6));
 
-        view.setTag(Long.valueOf(model.id));
+        Long id_ = Long.valueOf(model.id);
+        view.setTag(id_);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ((homePage) context_).openAlarm(((Long) view.getTag()).longValue());
+            }
+        });
+
+        ToggleButton toggleButton = (ToggleButton) view.findViewById(R.id.toggleSwitch);
+        toggleButton.setChecked(model.isOn);
+        toggleButton.setTag(id_);
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                ((homePage) context_).setAlarmEnabled(((Long) buttonView.getTag()).longValue(), isChecked);
             }
         });
 

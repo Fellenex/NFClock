@@ -57,6 +57,7 @@ public class CreateAlarm extends ActionBarActivity {
 
     private EditText nameDisplay;
     private EditText intervalDisplay;
+    private EditText alarmToneDisplay;
 
     private Calendar endTime;
     private Calendar startTime;
@@ -99,6 +100,8 @@ public class CreateAlarm extends ActionBarActivity {
         startTimeDisplay = (EditText) findViewById(R.id.startTimeDisplay);
         endTimeDisplay = (EditText) findViewById(R.id.endTimeDisplay);
 
+        alarmToneDisplay = (EditText) findViewById(R.id.alarmToneDisplay);
+
         intervalDisplay = (EditText) findViewById(R.id.alarmIntervalDisplay);
         isRepeating = (CheckBox) findViewById(R.id.repeatWeekly);
         isVibrate = (CheckBox) findViewById(R.id.toggleVibrate);
@@ -112,18 +115,17 @@ public class CreateAlarm extends ActionBarActivity {
         isSaturday = (ToggleButton) findViewById(R.id.toggleSaturday);
         isSunday = (ToggleButton) findViewById(R.id.toggleSunday);
 
-
-
-
-
-
-
         if (id == -1) { //new alarm
             alarmInstance = new AlarmTemplate();
         } else { //Populate the activity with previously created alarms details
             String longstr = Long.toString(id);
             Log.d("ID",longstr);
             alarmInstance = dbManager.getAlarm(id);
+
+            toneUri = alarmInstance.alarmTone;
+
+            alarmToneDisplay.setText(RingtoneManager.getRingtone(this, toneUri).getTitle(this));
+
 
             startTimeDisplay.setText(String.format("%02d:%02d", alarmInstance.startHour, alarmInstance.startMinute));
             endTimeDisplay.setText(String.format("%02d:%02d", alarmInstance.startHour, alarmInstance.startMinute));
@@ -150,11 +152,6 @@ public class CreateAlarm extends ActionBarActivity {
 
 
         }
-
-
-        //final LinearLayout toneSelection = (LinearLayout) findViewById(R.id.alarmToneLayout);
-        //final TextView toneSelection2 = (TextView) findViewById(R.id.alarmTone);
-        //final EditText toneSelection3 = (EditText) findViewById(R.id.alarmToneDisplay);
     }
 
 
@@ -170,20 +167,19 @@ public class CreateAlarm extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
-/*        if (resultCode == Activity.RESULT_OK && requestCode == 1){
+       if (resultCode == Activity.RESULT_OK && requestCode == 1){
             toneUri = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
 
             if (toneUri!=null){
                 TextView ringToneDisplay = (EditText) findViewById(R.id.alarmToneDisplay);
                 ringToneDisplay.setText(RingtoneManager.getRingtone(this, toneUri).getTitle(this));
             }
-        }*/
+        }
     }
 
     private void showTimePickerDialog(EditText timeDisplay, Calendar date) {
         activeTimeDisplay = timeDisplay;
         activeTime = date;
-        Log.d("WIN","WINNING");
 
         DialogFragment newFragment = new timePickerFragment();
         newFragment.show(getFragmentManager(), "myDialog");
@@ -257,7 +253,7 @@ public class CreateAlarm extends ActionBarActivity {
         EditText name = (EditText) findViewById(R.id.alarmNameDisplay);
         alarmInstance.name = name.getText().toString();
 
-       // alarmInstance.alarmTone = toneUri;
+        alarmInstance.alarmTone = toneUri;
 
         alarmInstance.isOn = true;
 
