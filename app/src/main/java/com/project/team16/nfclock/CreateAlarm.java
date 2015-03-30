@@ -244,6 +244,7 @@ public class CreateAlarm extends ActionBarActivity {
 
     private void updateAlarmTemplate() { //method updates the alarmInstance to be filled out with the values from the Activity.
 
+
         alarmInstance.startHour = startHour;
         alarmInstance.startMinute = startMinute;
         alarmInstance.endHour = endHour;

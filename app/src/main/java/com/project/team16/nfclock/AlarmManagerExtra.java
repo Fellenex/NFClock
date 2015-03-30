@@ -55,7 +55,7 @@ public class AlarmManagerExtra extends BroadcastReceiver {
                             !(day == nowDay && alarm.startHour < nowHour) &&
                             !(day == nowDay && alarm.startHour == nowHour && alarm.startMinute <= nowMinute)){
                         calendar.set(Calendar.DAY_OF_WEEK,day);
-
+                        Log.d("SET","ALARM");
                         setAlarm(context, calendar, pendingIntent);
                         alarmSet = true;
                         break;
@@ -70,6 +70,7 @@ public class AlarmManagerExtra extends BroadcastReceiver {
                         if (alarm.getRepeatingDay(day - 1) && day <= nowDay && alarm.repeatWeekly) {
                             calendar.set(Calendar.DAY_OF_WEEK,day);
                             calendar.add(Calendar.WEEK_OF_YEAR,1);
+                            Log.d("SET","ALARM");
                             setAlarm(context,calendar,pendingIntent);
                             alarmSet = true;
                             break;
