@@ -1,7 +1,9 @@
 package com.project.team16.nfclock;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -55,6 +57,22 @@ public class homePage extends ListActivity {
        // listView.setEmptyView(findViewById(android.R.id.empty));
         //listView.setAdapter(adapter_);
         //populateListView();
+
+    }
+
+    public void deleteAlarm(long id){
+        final long alarmId = id;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Delete Alarm?").setTitle("Delete alarm?").setCancelable(true).setNegativeButton("Cancel",null).setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                AlarmManagerExtra.voidAlarms(context_);
+                dbManager.deleteAlarm(alarmId);
+                adapter_.setAlarms(dbManager.getAlarms());
+                adapter_.notifyDataSetChanged();
+                AlarmManagerExtra.setAlarms(context_);
+            }
+        }).show();
 
     }
 

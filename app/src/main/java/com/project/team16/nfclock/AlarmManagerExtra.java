@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 
 import java.util.Calendar;
 import java.util.List;
@@ -17,12 +18,16 @@ import java.util.List;
  */
 public class AlarmManagerExtra extends BroadcastReceiver {
 
+    public static final String ID = "id";
+    public static final String TONE = "alarmTone";
+
     @Override
     public void onReceive(Context context, Intent intent){
         setAlarms(context);
     }
 
     public static void setAlarms(Context context){
+        Log.d("SET","ALARMS");
         voidAlarms(context);
 
         DBManager dbManager = new DBManager(context);
@@ -45,7 +50,7 @@ public class AlarmManagerExtra extends BroadcastReceiver {
                 final int nowMinute = Calendar.getInstance().get(Calendar.MINUTE);
                 boolean alarmSet = false;
 
-                for (int day = Calendar.MONDAY; day <= Calendar.SUNDAY; day++){
+                for (int day = Calendar.SUNDAY; day <= Calendar.SATURDAY; day++){
                     if (alarm.getRepeatingDay(day -1) && day >= nowDay &&
                             !(day == nowDay && alarm.startHour < nowHour) &&
                             !(day == nowDay && alarm.startHour == nowHour && alarm.startMinute <= nowMinute)){
@@ -61,7 +66,7 @@ public class AlarmManagerExtra extends BroadcastReceiver {
 
 
                 if (!alarmSet) {
-                    for (int day = Calendar.MONDAY; day <= Calendar.SUNDAY; day++){
+                    for (int day = Calendar.SUNDAY; day <= Calendar.SATURDAY; day++){
                         if (alarm.getRepeatingDay(day - 1) && day <= nowDay && alarm.repeatWeekly) {
                             calendar.set(Calendar.DAY_OF_WEEK,day);
                             calendar.add(Calendar.WEEK_OF_YEAR,1);
@@ -79,7 +84,7 @@ public class AlarmManagerExtra extends BroadcastReceiver {
     }
 
 
-    @SuppressLint("NewAPI")
+    @SuppressLint("NewApi")
     private static void setAlarm(Context context, Calendar calendar, PendingIntent pendingIntent){
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
@@ -90,16 +95,16 @@ public class AlarmManagerExtra extends BroadcastReceiver {
     }
 
     public static void voidAlarms(Context context){
-        Intent intent = new Intent(context, AlarmManager.class);
+
         DBManager dbManager = new DBManager(context);
         List<AlarmTemplate> alarmList = dbManager.getAlarms();
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
 
         if (alarmList != null){
             for (AlarmTemplate alarm : alarmList){
                 if (alarm.isOn) {
                     PendingIntent pendingIntent = createPendingIntent(context,alarm);
+                    AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
                     alarmManager.cancel(pendingIntent);
 
                 }

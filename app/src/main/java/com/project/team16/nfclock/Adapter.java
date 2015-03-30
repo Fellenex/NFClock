@@ -102,6 +102,14 @@ public class Adapter extends BaseAdapter {
             }
         });
 
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                ((homePage) context_).deleteAlarm(((Long) view.getTag()).longValue());
+                return true;
+            }
+        });
+
         return view;
     }
 

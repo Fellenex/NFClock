@@ -30,15 +30,18 @@
                 android:value="com.project.team16.nfclock.homePage" />
         </activity>
 
-        <receiver android:name="com.project.team16.nfclock.AlarmManager" >
+
+
+        <activity android:name="com.project.team16.nfclock.AlarmScreen"/>
+
+        <receiver android:name="com.project.team16.nfclock.AlarmManagerExtra" >
             <intent-filter>
-                <action android:name="android.intent.action.boot_completed" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
 
         <service android:name="com.project.team16.nfclock.AlarmActivity" android:enabled="true"/>
-
 
 
     </application>

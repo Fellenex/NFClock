@@ -163,6 +163,8 @@ public class DBManager extends SQLiteOpenHelper {
             alarmList.add(fillModel(c));
         }
 
+        db.close();
+
         if (!alarmList.isEmpty()){
             return alarmList;
         }
